@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>mongoose介绍以及实现增删改查 - Ludwig&#39;s blog</title>
+    <title>mongoose入门介绍 - Ludwig&#39;s blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
@@ -37,7 +37,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="https://herrludwig.github.io"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">mongoose介绍以及实现增删改查</h3>
+    <h3 class="subtitle">mongoose入门介绍</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -55,7 +55,7 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">mongoose介绍以及实现增删改查</h1>
+        <h1 class="title">mongoose入门介绍</h1>
         <div class="stuff">
             <span>九月 05, 2018</span>
             
@@ -71,26 +71,18 @@
 </ol>
 <h2 id="二、安装及使用"><a href="#二、安装及使用" class="headerlink" title="二、安装及使用"></a>二、安装及使用</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i mongoose --save</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-引入并连接"><a href="#2-引入并连接" class="headerlink" title="2. 引入并连接"></a>2. 引入并连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;);</span><br><span class="line">mongoose.connect(&apos;mongodb://localhost/test&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-引入并连接"><a href="#2-引入并连接" class="headerlink" title="2. 引入并连接"></a>2. 引入并连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;);</span><br><span class="line">mongoose.connect(&apos;mongodb://localhost/test&apos;,&#123; useNewUrlParser: true &#125;);</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-定义Schema"><a href="#3-定义Schema" class="headerlink" title="3. 定义Schema"></a>3. 定义Schema</h3><p>Schema为数据库对象的集合。Schema 是 Mongoose 里用到的一种数据模式，可以理解为“表”结构的定义；每个 Schema 会映射到 Mongodb 中的一个 collection。<br><img src="/2018/09/05/test/1.png" alt="1"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var UserSchema=mongoose.Schema(&#123;</span><br><span class="line">   name: String,</span><br><span class="line">   age:Number,</span><br><span class="line">   status:&apos;number&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var UserSchema=mongoose.Schema(&#123; // 注意：字段名称必须和collection保持一致</span><br><span class="line">   name: String,</span><br><span class="line">   age:Number,</span><br><span class="line">   status:&#123;</span><br><span class="line">      type:Number,</span><br><span class="line">      default:1   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-创建数据模型"><a href="#4-创建数据模型" class="headerlink" title="4. 创建数据模型"></a>4. 创建数据模型</h3><p>model 是由 Schema 生成的模型，可以对数据库进行操作，而Schema不能对数据库进行操作。mongoose.mode 里面可以传入两个或三个参数。</p>
+<h3 id="4-创建数据模型model"><a href="#4-创建数据模型model" class="headerlink" title="4. 创建数据模型model"></a>4. 创建数据模型model</h3><p>model 是由 Schema 生成的模型，可以对数据库进行操作，而Schema不能对数据库进行操作。mongoose.mode 里面可以传入两个或三个参数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongoose.model（参数1：&apos;模型名称&apos;（首字母大写），参数2：XXSchema，参数3：集合名称）</span><br></pre></td></tr></table></figure>
 
 <p>如果传入2个参数的话，这个模型会和模型名称相同的<strong>复数</strong>的集合建立连接。如通过下面<br>方法创建模型，那么这个模型将会操作 <strong>users</strong> 这个集合。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var User=mongoose.model(&apos;User&apos;, UserSchema)</span><br></pre></td></tr></table></figure>
 
 <p>如果传入3个参数的话，模型默认操作第三个参数定义的集合名称。</p>
-<h2 id="三、增删改查"><a href="#三、增删改查" class="headerlink" title="三、增删改查"></a>三、增删改查</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var u=new User(&#123; //实例化model，增加数据</span><br><span class="line">   name:&apos;Tom&apos;,</span><br><span class="line">   age:20,</span><br><span class="line">   status:true</span><br><span class="line">   &#125;)</span><br><span class="line">u.save();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">User.deleteOne(&#123; &apos;_id&apos;: &apos;5b72ada84e284f0acc8d318a&apos; &#125;, function (err) &#123;</span><br><span class="line">   if (err) &#123;</span><br><span class="line">      console.log(err);</span><br><span class="line">      return;</span><br><span class="line">   &#125;</span><br><span class="line">   console.log(&apos;删除成功&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">User.updateOne(&#123; &apos;_id&apos;: &apos;5b72ada84e284f0acc8d318a&apos; &#125;, &#123; name: &apos;Ben&apos; &#125;, function(err) &#123;</span><br><span class="line">   if(err)&#123;</span><br><span class="line">      console.log(err);</span><br><span class="line">      return;</span><br><span class="line">   &#125;</span><br><span class="line">   console.log(&apos;修改成功&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">User.find(&#123;&#125;,function(err,docs)&#123; //未限定条件即为全部查找</span><br><span class="line">   if(err)&#123;</span><br><span class="line">      console.log(err);</span><br><span class="line">      return;</span><br><span class="line">   &#125;</span><br><span class="line">   console.log(docs);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -117,7 +109,7 @@
     </div>
     
         <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、mongoose介绍"><span class="toc-number">1.</span> <span class="toc-text">一、mongoose介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、安装及使用"><span class="toc-number">2.</span> <span class="toc-text">二、安装及使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装"><span class="toc-number">2.1.</span> <span class="toc-text">1. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-引入并连接"><span class="toc-number">2.2.</span> <span class="toc-text">2. 引入并连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-定义Schema"><span class="toc-number">2.3.</span> <span class="toc-text">3. 定义Schema</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-创建数据模型"><span class="toc-number">2.4.</span> <span class="toc-text">4. 创建数据模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、增删改查"><span class="toc-number">3.</span> <span class="toc-text">三、增删改查</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、mongoose介绍"><span class="toc-number">1.</span> <span class="toc-text">一、mongoose介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、安装及使用"><span class="toc-number">2.</span> <span class="toc-text">二、安装及使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装"><span class="toc-number">2.1.</span> <span class="toc-text">1. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-引入并连接"><span class="toc-number">2.2.</span> <span class="toc-text">2. 引入并连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-定义Schema"><span class="toc-number">2.3.</span> <span class="toc-text">3. 定义Schema</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-创建数据模型model"><span class="toc-number">2.4.</span> <span class="toc-text">4. 创建数据模型model</span></a></li></ol></li></ol>
         </div>
     
 </div>
