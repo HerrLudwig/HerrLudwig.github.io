@@ -83,7 +83,7 @@
 <p>在封装完以上两个模块之后，我们就可以在外部进行调用了，例如在外部的app.js里我们可以这样增加并查找数据：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var UserModel=require(&apos;./model/user.js&apos;);</span><br><span class="line">var user=new UserModel(&#123; //增</span><br><span class="line">   name:&quot;Tom&quot;,</span><br><span class="line">   age:20</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">user.save(function(err)&#123; //存</span><br><span class="line">   if(err)&#123;</span><br><span class="line">      console.log(err);</span><br><span class="line">      return;</span><br><span class="line">   &#125;</span><br><span class="line">   UserModel.find(&#123;&#125;,function(err,docs)&#123; //找</span><br><span class="line">      if(err)&#123;</span><br><span class="line">         console.log(err);</span><br><span class="line">         return;</span><br><span class="line">      &#125;</span><br><span class="line">      console.log(docs);</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h2 id="三、疑问"><a href="#三、疑问" class="headerlink" title="三、疑问"></a>三、疑问</h2><p>“我们注意到每封装一个新模块都要调用一次db.js，那么会不会造成MongoDB多次重连而导致性能变差？”<br>答案是否定的，因为底层用到了单例优化，所以数据库只会连接一次，连接之后其余模块运行时间会大大缩短，从而提保证了性能。</p>
+<h2 id="三、答疑"><a href="#三、答疑" class="headerlink" title="三、答疑"></a>三、答疑</h2><p><strong>Q</strong>：“我们注意到每封装一个新模块都要调用一次db.js，那么会不会使MongoDB多次重连而导致性能变差？”<br><strong>A</strong>：并不会，因为mongoose底层用到了单例优化，所以数据库只会连接一次，连接之后其余模块的运行时间会大大缩短，从而保证了性能。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -110,7 +110,7 @@
     </div>
     
         <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、mongoose的增删改查"><span class="toc-number">1.</span> <span class="toc-text">一、mongoose的增删改查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、mongoose的模块化"><span class="toc-number">2.</span> <span class="toc-text">二、mongoose的模块化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、疑问"><span class="toc-number">3.</span> <span class="toc-text">三、疑问</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、mongoose的增删改查"><span class="toc-number">1.</span> <span class="toc-text">一、mongoose的增删改查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、mongoose的模块化"><span class="toc-number">2.</span> <span class="toc-text">二、mongoose的模块化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、答疑"><span class="toc-number">3.</span> <span class="toc-text">三、答疑</span></a></li></ol>
         </div>
     
 </div>
