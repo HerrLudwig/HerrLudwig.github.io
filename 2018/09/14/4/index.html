@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>mongoose模式修饰符 - Ludwig&#39;s blog</title>
+    <title>mongoose数据校验 - Ludwig&#39;s blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="HerrLudwig,"> 
-    <meta name="description" content="一、预定义模式修饰符mongoose 提供了一些预定义模式修饰符可以对我们增加的数据进行格式化。其中 lowercase/uppercase 可以转换字符串的大小写，trim 能够对字段两端去空格。,"> 
+    <meta name="description" content="一、校验参数1、required : 表示这个数据必须传入2、max: 用于 Number 类型数据，最大值3、min: 用于 Number 类型数据，最小值4、enum：枚举类型，要求数据必须满足,"> 
     <meta name="author" content="HerrLudwig"> 
     <link rel="alternative" href="atom.xml" title="Ludwig&#39;s blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/home.png"> 
@@ -35,7 +35,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="https://herrludwig.github.io"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">mongoose模式修饰符</h3>
+    <h3 class="subtitle">mongoose数据校验</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -53,23 +53,21 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">mongoose模式修饰符</h1>
+        <h1 class="title">mongoose数据校验</h1>
         <div class="stuff">
-            <span>九月 10, 2018</span>
+            <span>九月 14, 2018</span>
             
   <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/数据库/">数据库</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <h2 id="一、预定义模式修饰符"><a href="#一、预定义模式修饰符" class="headerlink" title="一、预定义模式修饰符"></a>一、预定义模式修饰符</h2><p>mongoose 提供了一些预定义模式修饰符可以对我们增加的数据进行格式化。其中 lowercase/uppercase 可以转换字符串的大小写，trim 能够对字段两端去空格。在我们封装model的时候把预定义模式修饰符加进去，如下所示，就可以实现增加数据的格式化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var UserSchema=mongoose.Schema(&#123;    </span><br><span class="line">    name:&#123;</span><br><span class="line">        type:String,</span><br><span class="line">        name:trim </span><br><span class="line">    &#125;,</span><br><span class="line">    age:Number,       </span><br><span class="line">    status:&#123;</span><br><span class="line">        type:Number,</span><br><span class="line">        default:1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+            <h2 id="一、校验参数"><a href="#一、校验参数" class="headerlink" title="一、校验参数"></a>一、校验参数</h2><p>1、required : 表示这个数据必须传入<br>2、max: 用于 Number 类型数据，最大值<br>3、min: 用于 Number 类型数据，最小值<br>4、enum：枚举类型，要求数据必须满足枚举值 enum: [‘0’, ‘1’, ‘2’]，用于string<br>5、match：增加的数据必须符合 match 正则表达式，用于string<br>6、maxlength：最大长度，用于string<br>7、minlength：最小长度<br>例如在定义Schema时加入校验参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var UserSchema=mongoose.Schema(&#123;</span><br><span class="line">    name:&#123;</span><br><span class="line">        type:String,  //指定类型</span><br><span class="line">        trim:true,  //去空格         </span><br><span class="line">        required:true  //name必须传入     </span><br><span class="line">    &#125;,</span><br><span class="line">    sn:&#123;</span><br><span class="line">        type:String,</span><br><span class="line">        index:true,  //索引.</span><br><span class="line">        match:/^sn(.*)/i,  //必须以sn为开头，忽略大小写</span><br><span class="line">        minlength:10</span><br><span class="line">    &#125;,   </span><br><span class="line">    age:&#123;</span><br><span class="line">        type:Number,</span><br><span class="line">        min:0,    //用在number类型上面</span><br><span class="line">        max:150</span><br><span class="line">    &#125;,       </span><br><span class="line">    status:&#123;</span><br><span class="line">        type:String, </span><br><span class="line">        default:&apos;success&apos;, //默认值</span><br><span class="line">        enum:[&apos;success&apos;,&apos;error&apos;]   //status的值必须在对应的数组里面，注意枚举是用于String</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">module.exports=mongoose.model(&apos;User&apos;,UserSchema,&apos;user&apos;);</span><br></pre></td></tr></table></figure>
 
-<p>这样当我们增加的数据 name 为“　Tom　”时，实际录入的 name 就被格式化成了“Tom”。大小写的转换也是同样的道理。</p>
-<h2 id="二、自定义模式修饰符"><a href="#二、自定义模式修饰符" class="headerlink" title="二、自定义模式修饰符"></a>二、自定义模式修饰符</h2><p>除了 mongoose 内置的修饰符以外，我们还可以通过 set（建议使用）修饰符在增加数据的时候对数据进行格式化。也可以通过 get（不建议使用）在实例获取 model 里面数据的时候对数据进行格式化。<br>下面这个例子展示了set修饰符的用法，实现了把地址加上’http://‘的格式化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var FocusSchema=mongoose.Schema(&#123;</span><br><span class="line">    title:&#123;</span><br><span class="line">        type:String,</span><br><span class="line">        lowercase:true    //预定义的小写格式化</span><br><span class="line">    &#125;,   </span><br><span class="line">    redirect:&#123;</span><br><span class="line">        type:String,</span><br><span class="line">        set(parmas)&#123;   //增加数据的时候对redirect字段进行处理，parmas可以获取redirect的值</span><br><span class="line">            if(!parmas)&#123;</span><br><span class="line">                return &apos;&apos;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">               if(parmas.indexOf(&apos;http://&apos;)!=0 &amp;&amp; parmas.indexOf(&apos;https://&apos;)!=0)&#123; </span><br><span class="line">                   //indexOf查找位置，如果在首位则返回0，不存在则返回-1，如果在后面则返回的是正数</span><br><span class="line">                   return &apos;http://&apos;+parmas;</span><br><span class="line">               &#125;</span><br><span class="line">               return parmas</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="二、自定义验证器"><a href="#二、自定义验证器" class="headerlink" title="二、自定义验证器"></a>二、自定义验证器</h2><p>与自定义修饰符 set 相似，我们可以使用 validate 来自定义验证器。如果通过验证就返回 true，没有通过则返回 false。在上个例子中sn可以改成如下自定义验证器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sn:&#123;</span><br><span class="line">    type:String,</span><br><span class="line">    index:true,  //索引.</span><br><span class="line">    match:/^sn(.*)/i,  //必须以sn为开头，忽略大小写</span><br><span class="line">    validate: function(sn) &#123;</span><br><span class="line">        return sn.length &gt;= 10;  //sn长度大于等于10</span><br><span class="line">    &#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>即如果用户输入的是 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>, 则保存为<a href="http://www.baidu.com；如果是http://www.baidu.com，则仍为" target="_blank" rel="noopener">http://www.baidu.com；如果是http://www.baidu.com，则仍为</a> <a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -96,7 +94,7 @@
     </div>
     
         <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、预定义模式修饰符"><span class="toc-number">1.</span> <span class="toc-text">一、预定义模式修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、自定义模式修饰符"><span class="toc-number">2.</span> <span class="toc-text">二、自定义模式修饰符</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、校验参数"><span class="toc-number">1.</span> <span class="toc-text">一、校验参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、自定义验证器"><span class="toc-number">2.</span> <span class="toc-text">二、自定义验证器</span></a></li></ol>
         </div>
     
 </div>
