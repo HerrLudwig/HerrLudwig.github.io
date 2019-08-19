@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Koa框架介绍、环境搭建以及异步的使用 - Ludwig&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="HerrLudwig,"> 
+    <meta name="description" content="一、Koa框架介绍Node.js 是一个异步的世界，官方 API 支持的都是 callback 形式的异步编程模型。这会带来许多问题，例如：1、callback 嵌套问题；2、异步函数中可能同步调用,"> 
+    <meta name="author" content="HerrLudwig"> 
+    <link rel="alternative" href="atom.xml" title="Ludwig&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/home.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Ludwig&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://herrludwig.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Koa框架介绍、环境搭建以及异步的使用</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Koa框架介绍、环境搭建以及异步的使用</h1>
+        <div class="stuff">
+            <span>十月 08, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/web框架/">web框架</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="一、Koa框架介绍"><a href="#一、Koa框架介绍" class="headerlink" title="一、Koa框架介绍"></a>一、Koa框架介绍</h2><p>Node.js 是一个异步的世界，官方 API 支持的都是 callback 形式的异步编程模型。这会带来许多问题，例如：1、callback 嵌套问题；2、异步函数中可能同步调用 callback 返回数据，带来不一致性。为了解决以上问题，Koa 出现了。<br>Koa 是一个由 Express 幕后的原班人马打造的 web 框架， 致力于成为 web 应用和 API 开发领域中的一个更小、更富有表现力、更健壮的基石。 通过使用 Es7 中的 async 和 await，Koa 帮你丢弃回调函数，并有力地提升错误处理效率。 Koa 并没有捆绑任何中间件，而是提供了一个轻量优雅的函数库，使得编写服务端应用变得得心应手。<br>Koa 的开发思路和 express 差不多，最大的特点就是可以避免异步嵌套。Koa基于最新的Es6、Es7语法，运行速度比Express更快。目前阿里就在使用 Koa 框架，并在 Koa 基础上面做了一些扩展和封装开发了一个开源框架 Egg.js。</p>
+<h2 id="二、Koa框架的安装使用"><a href="#二、Koa框架的安装使用" class="headerlink" title="二、Koa框架的安装使用"></a>二、Koa框架的安装使用</h2><p>1、安装 Node.js 8.x 以上的版本<br>Koa要求 Node.js 的版本高于 V7.6。因为 Node.js 7.6 版本开始完全支持 async/await，所以才能完全支持我们的 Koa2。<br>2、安装使用：<br>首先打开项目文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<p>生成 package.json 来管理项目的各种模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save koa / cnpm install --save koa</span><br></pre></td></tr></table></figure>
+
+<p>–save 表示自动修改 package.json 文件，自动添加依赖项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const koa=require(&apos;koa&apos;);</span><br><span class="line">const app=new koa();</span><br><span class="line"></span><br><span class="line">app.use(async(ctx)=&gt;&#123;  //配置中间件 （可以先当做路由）</span><br><span class="line"></span><br><span class="line">    ctx.body=&apos;hello koa&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、Koa异步处理Async、Await和Promise的使用"><a href="#三、Koa异步处理Async、Await和Promise的使用" class="headerlink" title="三、Koa异步处理Async、Await和Promise的使用"></a>三、Koa异步处理Async、Await和Promise的使用</h2><p>async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。<br>简单理解：<br>async 是让方法变成异步。<br>await 是等待异步方法执行完成。<br>详细说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">async function testAsync()&#123;</span><br><span class="line"></span><br><span class="line">    return &apos;Hello async&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const result = testAsync();</span><br><span class="line">console.log(result);</span><br></pre></td></tr></table></figure>
+
+<p>async 是让方法变成异步，在终端里用 node 执行这段代码，你会发现输出了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Promise &#123; &apos;Hello async&apos; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>即返回的是 Promise。</p>
+<p>await 在等待 async 方法执行完毕，其实 await 等待的只是一个表达式，这个表达式在官方文档里说的是 Promise 对象，但是它也可以接受普通值。<br><strong>注意</strong>：await 必须在 async 方法中才可以使用，因为 await 访问本身会造成程序堵塞，所以必须在异步方法中才可以使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function getData()&#123;</span><br><span class="line"></span><br><span class="line">    return &apos;Sam&apos;;</span><br><span class="line">&#125;</span><br><span class="line">async function testAsync()&#123;</span><br><span class="line"></span><br><span class="line">    return &apos;Hello async&apos;;</span><br><span class="line">&#125;</span><br><span class="line">async function test()&#123;</span><br><span class="line"></span><br><span class="line">    const v1=await getData();</span><br><span class="line">    const v2=await testAsync();</span><br><span class="line">    console.log(v1,v2);</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<p>async/await  同时使用：<br>async 会将其后的函数（函数表达式或 Lambda）的返回值封装成一个 Promise 对象，而 await 会等待这个 Promise 完成，并将其 resolve 的结果返回出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function findData() &#123;</span><br><span class="line"></span><br><span class="line">    return new Promise(resolve =&gt; &#123;</span><br><span class="line">      setTimeout(() =&gt; resolve(&quot;long_time_value&quot;), 1000);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">async function test() &#123;</span><br><span class="line"></span><br><span class="line">    const v = await findData();</span><br><span class="line">    console.log(v);</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line">//运行结果是等一秒钟后返回long_time_value</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='d047235f39f731e4f0f3'
+        data-cs='9e20ba75552bbff74925a80267ef9305194ae571'
+        data-r='gitalk'
+        data-o='HerrLudwig'
+        data-a='HerrLudwig'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Koa框架介绍"><span class="toc-number">1.</span> <span class="toc-text">一、Koa框架介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Koa框架的安装使用"><span class="toc-number">2.</span> <span class="toc-text">二、Koa框架的安装使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Koa异步处理Async、Await和Promise的使用"><span class="toc-number">3.</span> <span class="toc-text">三、Koa异步处理Async、Await和Promise的使用</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
