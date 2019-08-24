@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Node.js的HTTP模块、URL模块以及supervisor工具 - Ludwig&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="HerrLudwig,"> 
+    <meta name="description" content="一、Node.js创建第一个应用如果我们使用 PHP 来编写后端的代码时，需要使用 Apache 或者 Nginx 的 HTTP 服务器来处理客户端的请求。不过对 Node.js 来说概念就完全不一,"> 
+    <meta name="author" content="HerrLudwig"> 
+    <link rel="alternative" href="atom.xml" title="Ludwig&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/home.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+
+</head>
+    <!-- highlight.js代码高亮主题 css 引入-->
+    <link rel="stylesheet" href="/plugins/highlight/styles/arta.css">
+    <!-- highlight.js代码高亮主题 css 引入--></html>
+<body class="loading">
+    <span id="config-title" style="display:none">Ludwig&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://herrludwig.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Node.js的HTTP模块、URL模块以及supervisor工具</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Node.js的HTTP模块、URL模块以及supervisor工具</h1>
+        <div class="stuff">
+            <span>十月 06, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/运行环境/">运行环境</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="一、Node-js创建第一个应用"><a href="#一、Node-js创建第一个应用" class="headerlink" title="一、Node.js创建第一个应用"></a>一、Node.js创建第一个应用</h2><p>如果我们使用 PHP 来编写后端的代码时，需要使用 Apache 或者 Nginx 的 HTTP 服务器来处理客户端的请求。不过对 Node.js 来说概念就完全不一样了。使用 Node.js 时，我们不仅仅在实现一个应用，同时还实现了整个 HTTP 服务器。</p>
+<ol>
+<li><p><strong>引入 http 模块</strong></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var http</span> = require(<span class="string">"http"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建服务器</strong><br>接下来我们使用 http.createServer( ) 方法创建服务器，并使用 listen 方法绑定 8888 端口。函数通过 request / response 参数来接收和响应数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送 HTTP 头部</span></span><br><span class="line"><span class="comment">// HTTP 状态值: 200 : OK</span></span><br><span class="line"><span class="comment">// 设置 HTTP 头部，状态码是 200，文件类型是 html，字符集是 utf-8</span></span><br><span class="line">   response.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-Type"</span>:<span class="string">"text/html;charset=UTF-8"</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送响应数据 "Hello World"</span></span><br><span class="line">   res.end(<span class="string">"哈哈哈哈，我买了一个 iPhone"</span> + (<span class="number">1</span>+<span class="number">2</span>+<span class="number">3</span>) + <span class="string">"s"</span>);</span><br><span class="line"></span><br><span class="line">&#125;).listen(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 终端打印如下信息</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Server running at http://127.0.0.1:8888/'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>运行程序</strong><br>用命令行切换到程序对应目录，通过 node server.js 命令运行程序。浏览器输入 <a href="http://127.0.0.1:8888/" target="_blank" rel="noopener">http://127.0.0.1:8888/</a> 查看结果。有了 node，我们任何一个 js 文件都可以通过 node 来运行。也就是说 node 就是一个 js 的运行环境。</p>
+<h2 id="二、HTTP模块的使用"><a href="#二、HTTP模块的使用" class="headerlink" title="二、HTTP模块的使用"></a>二、HTTP模块的使用</h2><h2 id="三、URL模块的使用"><a href="#三、URL模块的使用" class="headerlink" title="三、URL模块的使用"></a>三、URL模块的使用</h2></li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='d047235f39f731e4f0f3'
+        data-cs='9e20ba75552bbff74925a80267ef9305194ae571'
+        data-r='gitalk'
+        data-o='HerrLudwig'
+        data-a='HerrLudwig'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Node-js创建第一个应用"><span class="toc-number">1.</span> <span class="toc-text">一、Node.js创建第一个应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、HTTP模块的使用"><span class="toc-number">2.</span> <span class="toc-text">二、HTTP模块的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、URL模块的使用"><span class="toc-number">3.</span> <span class="toc-text">三、URL模块的使用</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="/plugins/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+
+
+
+</html>
