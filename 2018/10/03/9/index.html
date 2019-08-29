@@ -66,11 +66,10 @@
         </div>
         <div class="content markdown">
             <h2 id="一、Node-js介绍"><a href="#一、Node-js介绍" class="headerlink" title="一、Node.js介绍"></a>一、Node.js介绍</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，非常适合在分布式设备上运行数据密集型的实时应用。它让 JavaScript 可以开发后端程序，实现几乎所有其他后端语言所能实现的功能。</p>
-<h2 id="二、Node-js的优势"><a href="#二、Node-js的优势" class="headerlink" title="二、Node.js的优势"></a>二、Node.js的优势</h2><ol>
-<li><strong>Node.js 语法完全是 JS 语法</strong><br>只要有 JS 基础就可以学会 Node.js 后端开发。前后端编程环境统一，可以大大降低开发成本。</li>
-<li><strong>Node.js 超强的高并发能力</strong><br>现在的服务器端语言中存在着一些问题。在 Java、PHP 或者 .net 等服务器端语言中，会为每一个客户端的连接创建一个新的线程。而每个线程需要耗费大约 2MB 内存。也就是说理论上，一个 8GB 内存的服务器可以同时连接的最大用户数为四千个左右。要让 Web 应用程序支持更多的用户，硬件成本当然就上升了。<br>而 Node.js 不为每个连接创建一个新的线程，仅仅使用一个线程。当有用户连接了，就触发一个内部事件，通过非阻塞 I/O 和事件驱动机制让 Node.js 程序宏观上也是并行的。使用 Node.js，一个 8GB 内存的服务器，可以同时处理超过四万用户的连接。</li>
-<li><strong>实现高性能服务器</strong><br>在服务器中经常需要处理各种二进制数据。但 JavaScript 只具有非常有限的对二进制数据的处理能力，而 Node.js 所提供的 Buffer 类则大大增强了其处理能力。另外在 V8 引擎内部使用了一种全新的编译技术。这使 JavaScript 代码与 C 语言代码具有非常相近的执行效率。<h2 id="三、Node-js-适合做什么"><a href="#三、Node-js-适合做什么" class="headerlink" title="三、Node.js 适合做什么"></a>三、Node.js 适合做什么</h2><img src="/2018/10/03/9/node.png" alt="9"></li>
-</ol>
+<h2 id="二、Node-js的优势"><a href="#二、Node-js的优势" class="headerlink" title="二、Node.js的优势"></a>二、Node.js的优势</h2><h3 id="1-Node-js-语法完全是-JS-语法"><a href="#1-Node-js-语法完全是-JS-语法" class="headerlink" title="1. Node.js 语法完全是 JS 语法"></a>1. Node.js 语法完全是 JS 语法</h3><p>只要有 JS 基础就可以学会 Node.js 后端开发。前后端编程环境统一，可以大大降低开发成本。</p>
+<h3 id="2-Node-js-超强的高并发能力"><a href="#2-Node-js-超强的高并发能力" class="headerlink" title="2. Node.js 超强的高并发能力"></a>2. Node.js 超强的高并发能力</h3><p>现在的服务器端语言中存在着一些问题。在 Java、PHP 或者 .net 等服务器端语言中，会为每一个客户端的连接创建一个新的线程。而每个线程需要耗费大约 2MB 内存。也就是说理论上，一个 8GB 内存的服务器可以同时连接的最大用户数为四千个左右。要让 Web 应用程序支持更多的用户，硬件成本当然就上升了。<br>而 Node.js 不为每个连接创建一个新的线程，仅仅使用一个线程。当有用户连接了，就触发一个内部事件，通过非阻塞 I/O 和事件驱动机制让 Node.js 程序宏观上也是并行的。使用 Node.js，一个 8GB 内存的服务器，可以同时处理超过四万用户的连接。</p>
+<h3 id="3-实现高性能服务器"><a href="#3-实现高性能服务器" class="headerlink" title="3. 实现高性能服务器"></a>3. 实现高性能服务器</h3><p>在服务器中经常需要处理各种二进制数据。但 JavaScript 只具有非常有限的对二进制数据的处理能力，而 Node.js 所提供的 Buffer 类则大大增强了其处理能力。另外在 V8 引擎内部使用了一种全新的编译技术。这使 JavaScript 代码与 C 语言代码具有非常相近的执行效率。</p>
+<h2 id="三、Node-js-适合做什么"><a href="#三、Node-js-适合做什么" class="headerlink" title="三、Node.js 适合做什么"></a>三、Node.js 适合做什么</h2><p><img src="/2018/10/03/9/node.png" alt="9"></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -97,7 +96,7 @@
     </div>
     
         <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Node-js介绍"><span class="toc-number">1.</span> <span class="toc-text">一、Node.js介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Node-js的优势"><span class="toc-number">2.</span> <span class="toc-text">二、Node.js的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Node-js-适合做什么"><span class="toc-number">3.</span> <span class="toc-text">三、Node.js 适合做什么</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Node-js介绍"><span class="toc-text">一、Node.js介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Node-js的优势"><span class="toc-text">二、Node.js的优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Node-js-语法完全是-JS-语法"><span class="toc-text">1. Node.js 语法完全是 JS 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Node-js-超强的高并发能力"><span class="toc-text">2. Node.js 超强的高并发能力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-实现高性能服务器"><span class="toc-text">3. 实现高性能服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Node-js-适合做什么"><span class="toc-text">三、Node.js 适合做什么</span></a></li></ol>
         </div>
     
 </div>
