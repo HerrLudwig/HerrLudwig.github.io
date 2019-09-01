@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Archive</title>
+    <title>用利用 HTTP、URl、PATH 以及 FS 模块创建一个 WEB 服务器 - Ludwig&#39;s blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="HerrLudwig,"> 
-    
+    <meta name="description" content="一、WEB 服务器介绍Web 服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等 Web 客户端提供文档，也可以放置网站文件，让全世界浏览；可以放置数据文件，让全世界下载,"> 
     <meta name="author" content="HerrLudwig"> 
     <link rel="alternative" href="atom.xml" title="Ludwig&#39;s blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/home.png"> 
@@ -33,86 +33,73 @@
 <body class="loading">
     <span id="config-title" style="display:none">Ludwig&#39;s blog</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                    <div class="timeline">
-                      <h2 class="timeline-title">归档: 15篇</h2>
-                      
-                        
-                          <h3 class="timeline-subtitle">2018</h3>
-                        
-                        <div class="timeline-item">
-                          <time>2018-11-12</time>
-                          <a target="_self" href="/2018/11/12/8/">Koa中间件</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-11-09</time>
-                          <a target="_self" href="/2018/11/09/7/">Koa路由、get传值、动态路由</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-11-05</time>
-                          <a target="_self" href="/2018/11/05/6/">Koa框架介绍、环境搭建以及异步的使用</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-10-16</time>
-                          <a target="_self" href="/2018/10/16/14/">用利用 HTTP、URl、PATH 以及 FS 模块创建一个 WEB 服务器</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-10-13</time>
-                          <a target="_self" href="/2018/10/13/13/">fs 模块文件流与管道流</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-10-12</time>
-                          <a target="_self" href="/2018/10/12/12/">Node.js 的 fs 模块</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-10-09</time>
-                          <a target="_self" href="/2018/10/09/11/">CommonJs、Node.js 自定义模块、NPM 以及 package.json</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-10-06</time>
-                          <a target="_self" href="/2018/10/06/10/">Node.js的创建服务以及HTTP模块、URL模块</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-10-03</time>
-                          <a target="_self" href="/2018/10/03/9/">为什么选择Node.js</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2018-09-16</time>
-                          <a target="_self" href="/2018/09/16/5/">aggregate聚合管道</a>
-                        </div>
-                      
-                    </div>
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://herrludwig.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">用利用 HTTP、URl、PATH 以及 FS 模块创建一个 WEB 服务器</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">用利用 HTTP、URl、PATH 以及 FS 模块创建一个 WEB 服务器</h1>
+        <div class="stuff">
+            <span>十月 16, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/运行环境/">运行环境</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="一、WEB-服务器介绍"><a href="#一、WEB-服务器介绍" class="headerlink" title="一、WEB 服务器介绍"></a>一、WEB 服务器介绍</h2><p>Web 服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等 Web 客户端提供文档，也可以放置网站文件，让全世界浏览；可以放置数据文件，让<br>全世界下载。目前最主流的三个 Web 服务器是 Apache、Nginx、IIS。</p>
+<h2 id="二、使用-Nodejs-创建一个-WEB-服务器"><a href="#二、使用-Nodejs-创建一个-WEB-服务器" class="headerlink" title="二、使用 Nodejs 创建一个 WEB 服务器"></a>二、使用 Nodejs 创建一个 WEB 服务器</h2>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='d047235f39f731e4f0f3'
+        data-cs='9e20ba75552bbff74925a80267ef9305194ae571'
+        data-r='gitalk'
+        data-o='HerrLudwig'
+        data-a='HerrLudwig'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、WEB-服务器介绍"><span class="toc-text">一、WEB 服务器介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、使用-Nodejs-创建一个-WEB-服务器"><span class="toc-text">二、使用 Nodejs 创建一个 WEB 服务器</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
